@@ -23,4 +23,5 @@ ucop.teardownHost(region, hostId)
 })
 .fail(function(err) {
     helper.print(err);
+    process.exit(1);
 });
