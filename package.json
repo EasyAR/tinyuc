@@ -1,0 +1,29 @@
+{
+  "name": "tinyuc",
+  "version": "0.1.0",
+  "description": "utilities for ucloud.cn",
+  "main": "index.js",
+  "bin": {
+    "createHost": "bin/createHost.js",
+    "deleteHost": "bin/deleteHost.js",
+    "searchImage": "bin/searchImage.js",
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EasyAR/tinyuc.git"
+  },
+  "author": "qszhu@sightp.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EasyAR/tinyuc/issues"
+  },
+  "homepage": "https://github.com/EasyAR/tinyuc#readme",
+  "dependencies": {
+    "q": "^1.4.1",
+    "superagent": "^1.3.0",
+    "yargs": "^3.24.0"
+  }
+}
