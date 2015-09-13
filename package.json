@@ -4,9 +4,9 @@
   "description": "utilities for ucloud.cn",
   "main": "index.js",
   "bin": {
-    "createHost": "bin/createHost.js",
-    "deleteHost": "bin/deleteHost.js",
-    "searchImage": "bin/searchImage.js"
+    "createHost": "bin/createHost",
+    "deleteHost": "bin/deleteHost",
+    "searchImage": "bin/searchImage"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
