@@ -1,8 +1,16 @@
 # tinyuc - ucloud.cn utilities with sensable defaults
 
 ### Classes
+
+#### uccore
+core module
+
 * `function uccore(publicKey, privateKey)`
   * `function request(params, cb)`
+
+#### tinyuc
+operations with node callback
+
 * `function tinyuc(publicKey, privateKey)`
   * `function listHosts(region, cb)`
   * `function function listImages(region, cb)`
@@ -16,6 +24,10 @@
   * `function bindIP(region, eipId, hostId, cb)`
   * `function unbindIP(region, eipId, hostId, cb)`
   * `function releaseIP(region, eipId, cb)`
+
+#### tinyucPromise
+operations that return promises
+
 * `function tinyucPromise(publicKey, privateKey)`
   * `function listHosts(region)`
   * `function function listImages(region)`
@@ -29,6 +41,10 @@
   * `function bindIP(region, eipId, hostId)`
   * `function unbindIP(region, eipId, hostId)`
   * `function releaseIP(region, eipId)`
+
+#### tinyucOp
+common operations
+
 * `function tinyucOp(publicKey, privateKey)`
   * `function searchImage(region, imageName)`
   * `function waitHostState(region, hostId, state)`
@@ -37,7 +53,18 @@
 
 
 ### Utilities
+keys file is a JSON file containing public and private keys
+
+```javascript
+{
+    "publicKey": "<your ucloud public key>",
+    "privateKey": "<your ucloud private key>"
+}
+```
+
 #### searchImage
+search image by name
+
 ```bash
 $ searchImage -h
 Usage: searchImage [region] [image_name] -k [keys]
@@ -50,6 +77,8 @@ copyright 2015, sightp.com
 ```
 
 #### createHost
+create a host and bind an ip to it
+
 ```bash
 $ createHost -h
 Usage: createHost [region] [image_id] -n [name] -p [password] -c [num_cpus] -m [
@@ -70,6 +99,8 @@ copyright 2015, sightp.com
 ```
 
 #### deleteHost
+delete a host and release its binding ip
+
 ```bash
 $ deleteHost -h
 Usage: deleteHost [region] [host_id] -k [keys]
