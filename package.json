@@ -6,7 +6,7 @@
   "bin": {
     "createHost": "bin/createHost.js",
     "deleteHost": "bin/deleteHost.js",
-    "searchImage": "bin/searchImage.js",
+    "searchImage": "bin/searchImage.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
