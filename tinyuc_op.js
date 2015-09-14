@@ -30,7 +30,8 @@ function tinyucOp(publicKey, privateKey) {
         });
     }
 
-    function waitHostState(region, hostId, state) {
+    function waitHostState(region, hostId, state, interval) {
+        interval = interval || CHECK_STATE_INTERVAL;
         return Q.Promise(function(resolve, reject) {
             var check = function() {
                 tinyuc.showHost(region, hostId)
@@ -40,7 +41,7 @@ function tinyucOp(publicKey, privateKey) {
                     if (hostState == state) {
                         resolve(res);
                     } else {
-                        setTimeout(check, CHECK_STATE_INTERVAL);
+                        setTimeout(check, interval);
                     }
                 })
                 .fail(function(err) {
@@ -51,7 +52,7 @@ function tinyucOp(publicKey, privateKey) {
         });
     }
 
-    function setupHost(region, imageId, password, cpu, memory, disk, name, chargeType, operator, bandwidth) {
+    function setupHost(region, imageId, password, cpu, memory, disk, name, chargeType, operator, bandwidth, checkInterval) {
         return Q.Promise(function(resolve, reject) {
             var hostId;
             tinyuc.createHost(region, imageId, password, cpu, memory, disk, name, chargeType)
@@ -67,7 +68,7 @@ function tinyucOp(publicKey, privateKey) {
             })
             .then(function(res) {
                 helper.print(res);
-                return waitHostState(region, hostId, HOST_STATE.RUNNING);
+                return waitHostState(region, hostId, HOST_STATE.RUNNING, checkInterval);
             })
             .then(function(res) {
                 resolve(res);
@@ -78,7 +79,7 @@ function tinyucOp(publicKey, privateKey) {
         });
     }
 
-    function teardownHost(region, hostId) {
+    function teardownHost(region, hostId, checkInterval) {
         return Q.Promise(function(resolve, reject) {
             var ipId;
             tinyuc.showHost(region, hostId)
@@ -102,7 +103,7 @@ function tinyucOp(publicKey, privateKey) {
             })
             .then(function(res) {
                 helper.print(res);
-                return waitHostState(region, hostId, HOST_STATE.STOPPED);
+                return waitHostState(region, hostId, HOST_STATE.STOPPED, checkInterval);
             })
             .then(function(res) {
                 helper.print(res);

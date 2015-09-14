@@ -1,0 +1,15 @@
+{
+  "RetCode": 0,
+  "Action": "AllocateEIPResponse",
+  "EIPSet": [
+    {
+      "EIPId": "eip-n4vpkm",
+      "EIPAddr": [
+        {
+          "OperatorName": "Bgp",
+          "IP": "123.59.85.25"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "RetCode": 0,
+  "Action": "CreateUHostInstanceResponse",
+  "UHostIds": [
+    "uhost-ts0lck"
+  ]
+}

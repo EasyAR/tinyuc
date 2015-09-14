@@ -47,9 +47,9 @@ common operations
 
 * `function tinyucOp(publicKey, privateKey)`
   * `function searchImage(region, imageName)`
-  * `function waitHostState(region, hostId, state)`
-  * `function setupHost(region, imageId, password, cpu, memory, disk, name, chargeType, operator, bandwidth)`
-  * `function teardownHost(region, hostId)`
+  * `function waitHostState(region, hostId, state, [interval])`
+  * `function setupHost(region, imageId, password, cpu, memory, disk, name, chargeType, operator, bandwidth, [checkInterval])`
+  * `function teardownHost(region, hostId, [checkInterval])`
 
 
 ### Utilities

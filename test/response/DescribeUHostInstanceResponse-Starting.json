@@ -1,0 +1,52 @@
+{
+  "RetCode": 0,
+  "Action": "DescribeUHostInstanceResponse",
+  "UHostSet": [
+    {
+      "UHostId": "uhost-ts0lck",
+      "UHostType": "Normal",
+      "OsType": "Linux",
+      "OsName": "Ubuntu 14.04 64bit",
+      "ImageId": "6039eefd-9c1f-4f11-9cb6-0ca521de7f96",
+      "BasicImageId": "uimage-j4fbrn",
+      "BasicImageName": "Ubuntu 14.04 64位",
+      "Tag": "Default",
+      "Name": "test",
+      "Remark": "",
+      "State": "Starting",
+      "NetworkState": "Connected",
+      "CreateTime": 1442220677,
+      "ChargeType": "Dynamic",
+      "ExpireTime": 1442224277,
+      "CPU": 1,
+      "Memory": 2048,
+      "DiskSet": [
+        {
+          "Type": "Boot",
+          "Drive": "/dev/vda",
+          "Size": 20
+        },
+        {
+          "Type": "Data",
+          "DiskId": "e8e17f8a-e9a9-4562-836b-10653ea23c64",
+          "Drive": "/dev/vdb",
+          "Size": 20
+        }
+      ],
+      "NetCapability": "Normal",
+      "IPSet": [
+        {
+          "Type": "Private",
+          "IP": "10.10.182.212"
+        },
+        {
+          "Type": "Bgp",
+          "IPId": "eip-n4vpkm",
+          "IP": "123.59.85.25",
+          "Bandwidth": 5
+        }
+      ]
+    }
+  ],
+  "TotalCount": 1
+}

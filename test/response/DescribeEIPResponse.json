@@ -1,0 +1,28 @@
+{
+  "RetCode": 0,
+  "Action": "DescribeEIPResponse",
+  "TotalCount": 1,
+  "TotalBandwidth": 5,
+  "EIPSet": [
+    {
+      "Bandwidth": 5,
+      "BandwidthType": 0,
+      "PayMode": "Bandwidth",
+      "CreateTime": 1442221629,
+      "Status": "free",
+      "Weight": 50,
+      "Name": "EIP",
+      "Tag": "Default",
+      "Remark": "",
+      "EIPAddr": [
+        {
+          "OperatorName": "Bgp",
+          "IP": "123.59.85.25"
+        }
+      ],
+      "ExpireTime": 1442225229,
+      "ChargeType": "Dynamic",
+      "EIPId": "eip-n4vpkm"
+    }
+  ]
+}

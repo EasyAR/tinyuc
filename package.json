@@ -9,7 +9,7 @@
     "searchImage": "bin/searchImage"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node_modules/mocha/bin/mocha test"
   },
   "repository": {
     "type": "git",
@@ -25,5 +25,10 @@
     "q": "^1.4.1",
     "superagent": "^1.3.0",
     "yargs": "^3.24.0"
+  },
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "mocha": "^2.3.2",
+    "nock": "^2.10.0"
   }
 }
