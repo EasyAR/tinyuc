@@ -6,6 +6,13 @@ function tinyuc(publicKey, privateKey) {
 
     var uccore = require('./uccore')(publicKey, privateKey);
 
+    var CHARGE_TYPE = {
+        'YEAR': 'Year',
+        'MONTH': 'Month',
+        'DYNAMIC': 'Dynamic',
+        'TRIAL': 'Trial'
+    }
+
     function listHosts(region, cb) {
         var params = {
             'Action': 'DescribeUHostInstance',
@@ -33,7 +40,7 @@ function tinyuc(publicKey, privateKey) {
         uccore.request(params, cb);
     }
 
-    function createHost(region, imageId, password, cpu, memory, disk, name, cb) {
+    function createHost(region, imageId, password, cpu, memory, disk, name, chargeType, cb) {
         var params = {
             'Action': 'CreateUHostInstance',
             'Region': region,
@@ -44,7 +51,7 @@ function tinyuc(publicKey, privateKey) {
             'Memory': memory,
             'DiskSpace': disk,
             'Name': name,
-            'ChargeType': 'Dynamic'
+            'ChargeType': chargeType
         };
         uccore.request(params, cb);
     }
@@ -128,6 +135,7 @@ function tinyuc(publicKey, privateKey) {
     }
 
     return {
+        CHARGE_TYPE: CHARGE_TYPE,
         listHosts: listHosts,
         listImages: listImages,
         createCustomImage: createCustomImage,

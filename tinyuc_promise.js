@@ -25,9 +25,9 @@ function tinyucPromise(publicKey, privateKey) {
         return deferred.promise;
     }
 
-    function createHost(region, imageId, password, cpu, memory, disk, name) {
+    function createHost(region, imageId, password, cpu, memory, disk, name, chargeType) {
         var deferred = Q.defer();
-        tinyuc.createHost(region, imageId, password, cpu, memory, disk, name, deferred.makeNodeResolver());
+        tinyuc.createHost(region, imageId, password, cpu, memory, disk, name, chargeType, deferred.makeNodeResolver());
         return deferred.promise;
     }
 
@@ -80,6 +80,7 @@ function tinyucPromise(publicKey, privateKey) {
     }
 
     return {
+        CHARGE_TYPE: tinyuc.CHARGE_TYPE,
         listHosts: listHosts,
         listImages: listImages,
         createCustomImage: createCustomImage,

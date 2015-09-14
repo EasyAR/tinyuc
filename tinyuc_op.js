@@ -7,8 +7,11 @@ var helper = require('./helper');
 
 function tinyucOp(publicKey, privateKey) {
 
-    var HOST_STATE_RUNNING = exports.HOST_STATE_RUNNING = 'Running';
-    var HOST_STATE_STOPPED = exports.HOST_STATE_STOPPED = 'Stopped';
+    var HOST_STATE = {
+        'RUNNING': 'Running',
+        'STOPPED': 'Stopped'
+    };
+
     var CHECK_STATE_INTERVAL = 10000;
 
     var tinyuc = require('./tinyuc_promise')(publicKey, privateKey);
@@ -48,10 +51,10 @@ function tinyucOp(publicKey, privateKey) {
         });
     }
 
-    function setupHost(region, imageId, password, cpu, memory, disk, name, operator, bandwidth) {
+    function setupHost(region, imageId, password, cpu, memory, disk, name, chargeType, operator, bandwidth) {
         return Q.Promise(function(resolve, reject) {
             var hostId;
-            tinyuc.createHost(region, imageId, password, cpu, memory, disk, name)
+            tinyuc.createHost(region, imageId, password, cpu, memory, disk, name, chargeType)
             .then(function(res) {
                 helper.print(res);
                 hostId = res.UHostIds[0];
@@ -64,7 +67,7 @@ function tinyucOp(publicKey, privateKey) {
             })
             .then(function(res) {
                 helper.print(res);
-                return waitHostState(region, hostId, HOST_STATE_RUNNING);
+                return waitHostState(region, hostId, HOST_STATE.RUNNING);
             })
             .then(function(res) {
                 resolve(res);
@@ -99,7 +102,7 @@ function tinyucOp(publicKey, privateKey) {
             })
             .then(function(res) {
                 helper.print(res);
-                return waitHostState(region, hostId, HOST_STATE_STOPPED);
+                return waitHostState(region, hostId, HOST_STATE.STOPPED);
             })
             .then(function(res) {
                 helper.print(res);
@@ -115,6 +118,7 @@ function tinyucOp(publicKey, privateKey) {
     }
 
     return {
+        HOST_STATE: HOST_STATE,
         searchImage: searchImage,
         waitHostState: waitHostState,
         setupHost: setupHost,

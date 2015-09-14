@@ -15,7 +15,7 @@ operations with node callback
   * `function listHosts(region, cb)`
   * `function function listImages(region, cb)`
   * `function createCustomImage(region, hostId, imageName, cb)`
-  * `function createHost(region, imageId, password, cpu, memory, disk, name, cb)`
+  * `function createHost(region, imageId, password, cpu, memory, disk, name, chargeType, cb)`
   * `function showHost(region, hostId, cb)`
   * `function stopHost(region, hostId, cb)`
   * `function deleteHost(region, hostId, cb)`
@@ -32,7 +32,7 @@ operations that return promises
   * `function listHosts(region)`
   * `function function listImages(region)`
   * `function createCustomImage(region, hostId, imageName)`
-  * `function createHost(region, imageId, password, cpu, memory, disk, name)`
+  * `function createHost(region, imageId, password, cpu, memory, disk, name, chargeType)`
   * `function showHost(region, hostId)`
   * `function stopHost(region, hostId)`
   * `function deleteHost(region, hostId)`
@@ -48,7 +48,7 @@ common operations
 * `function tinyucOp(publicKey, privateKey)`
   * `function searchImage(region, imageName)`
   * `function waitHostState(region, hostId, state)`
-  * `function setupHost(region, imageId, password, cpu, memory, disk, name, operator, bandwidth)`
+  * `function setupHost(region, imageId, password, cpu, memory, disk, name, chargeType, operator, bandwidth)`
   * `function teardownHost(region, hostId)`
 
 
