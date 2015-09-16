@@ -24,6 +24,9 @@ operations with node callback
   * `function bindIP(region, eipId, hostId, cb)`
   * `function unbindIP(region, eipId, hostId, cb)`
   * `function releaseIP(region, eipId, cb)`
+  * `function getFirewalls(region, cb)`
+  * `function createFirewall(region, ports, cb)`
+  * `function bindFirewall(region, firewallId, hostId, cb)`
 
 #### tinyucPromise
 operations that return promises
@@ -41,6 +44,9 @@ operations that return promises
   * `function bindIP(region, eipId, hostId)`
   * `function unbindIP(region, eipId, hostId)`
   * `function releaseIP(region, eipId)`
+  * `function getFirewalls(region)`
+  * `function createFirewall(region, ports)`
+  * `function bindFirewall(region, firewallId, hostId)`
 
 #### tinyucOp
 common operations
@@ -48,7 +54,7 @@ common operations
 * `function tinyucOp(publicKey, privateKey)`
   * `function searchImage(region, imageName)`
   * `function waitHostState(region, hostId, state, [interval])`
-  * `function setupHost(region, imageId, password, cpu, memory, disk, name, chargeType, operator, bandwidth, [checkInterval])`
+  * `function setupHost(config, [checkInterval])`
   * `function teardownHost(region, hostId, [checkInterval])`
 
 
@@ -71,7 +77,7 @@ Usage: searchImage [region] [image_name] -k [keys]
 
 Options:
   -h, --help  Show help                                                [boolean]
-  -k, --keys                                              [default: "keys.json"]
+  -k, --keys                                       [default: "ucloud_keys.json"]
 
 copyright 2015, sightp.com
 ```
@@ -82,18 +88,21 @@ create a host and bind an ip to it
 ```bash
 $ createHost -h
 Usage: createHost [region] [image_id] -n [name] -p [password] -c [num_cpus] -m [
-memory] -d [disk_size] -o [operator] -b [bandwidth] -k [keys]
+memory] -d [disk_size] -g [charge_type] -o [operator] -b [bandwidth] -f [
+firewall_ports] -k [keys]
 
 Options:
-  -h, --help       Show help                                           [boolean]
+  -h, --help            Show help                                      [boolean]
   -n, --name                                               [default: "newImage"]
   -p, --password                                     [default: "secretPassword"]
   -c, --num_cpus                                                  [default: "2"]
   -m, --memory                                                 [default: "2048"]
   -d, --disk_size                                                [default: "20"]
+  -g, --charge_type                                         [default: "Dynamic"]
   -o, --operator                                                [default: "Bgp"]
   -b, --bandwidth                                                 [default: "5"]
-  -k, --keys                                              [default: "keys.json"]
+  -f, --firewall_ports                                   [array] [default: [22]]
+  -k, --keys                                       [default: "ucloud_keys.json"]
 
 copyright 2015, sightp.com
 ```
@@ -107,7 +116,7 @@ Usage: deleteHost [region] [host_id] -k [keys]
 
 Options:
   -h, --help  Show help                                                [boolean]
-  -k, --keys                                              [default: "keys.json"]
+  -k, --keys                                       [default: "ucloud_keys.json"]
 
 copyright 2015, sightp.com
 ```

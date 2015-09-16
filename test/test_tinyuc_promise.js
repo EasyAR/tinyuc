@@ -68,4 +68,19 @@ describe('tinyuc promise', function() {
         helper.check(tinyuc.releaseIP('some-region', 'some-ip'), done);
     });
 
+    it('should get firewalls', function(done) {
+        helper.mockUCloud('DescribeSecurityGroup');
+        helper.check(tinyuc.getFirewalls('some-region'), done);
+    });
+
+    it('should create firewall', function(done) {
+        helper.mockUCloud('CreateSecurityGroup');
+        helper.check(tinyuc.createFirewall('some-region', [22]), done);
+    });
+
+    it('should bind firewall', function(done) {
+        helper.mockUCloud('GrantSecurityGroup');
+        helper.check(tinyuc.bindFirewall('some-region', 'some-firewall', 'some-host'), done);
+    });
+
 });

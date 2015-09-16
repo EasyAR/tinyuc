@@ -30,6 +30,44 @@ function tinyucOp(publicKey, privateKey) {
         });
     }
 
+    function searchFirewall(region, firewallName) {
+        return Q.promise(function(resolve, reject) {
+            tinyuc.getFirewalls(region)
+            .then(function(res) {
+                resolve(res.DataSet.filter(function(firewall) {
+                    return firewall.GroupName === firewallName;
+                }));
+            })
+            .fail(function(err) {
+                reject(err);
+            });
+        });
+    }
+
+    function getOrCreateFirewall(region, ports) {
+        return Q.promise(function(resolve, reject) {
+            var name = ports.sort().map(function(port) {
+                return String(port);
+            }).join(',');
+            searchFirewall(region, name)
+            .then(function(res) {
+                if (res.length < 1) {
+                    return tinyuc.createFirewall(region, ports)
+                    .then(function(res) {
+                        return searchFirewall(region, name);
+                    });
+                }
+                return res;
+            })
+            .then(function(res) {
+                resolve(res[0]);
+            })
+            .fail(function(err) {
+                reject(err);
+            });
+        });
+    }
+
     function waitHostState(region, hostId, state, interval) {
         interval = interval || CHECK_STATE_INTERVAL;
         return Q.Promise(function(resolve, reject) {
@@ -52,7 +90,18 @@ function tinyucOp(publicKey, privateKey) {
         });
     }
 
-    function setupHost(region, imageId, password, cpu, memory, disk, name, chargeType, operator, bandwidth, checkInterval) {
+    function setupHost(config, checkInterval) {
+        var region = config.region
+          , imageId = config.imageId
+          , password = config.password
+          , cpu = config.cpu
+          , memory = config.memory
+          , disk = config.disk
+          , name = config.name
+          , chargeType = config.chargeType
+          , operator = config.operator
+          , bandwidth = config.bandwidth
+          , ports = config.ports;
         return Q.Promise(function(resolve, reject) {
             var hostId;
             tinyuc.createHost(region, imageId, password, cpu, memory, disk, name, chargeType)
@@ -65,6 +114,15 @@ function tinyucOp(publicKey, privateKey) {
                 helper.print(res);
                 var ipId = res.EIPSet[0].EIPId;
                 return tinyuc.bindIP(region, ipId, hostId);
+            })
+            .then(function(res) {
+                helper.print(res);
+                return getOrCreateFirewall(region, ports);
+            })
+            .then(function(res) {
+                helper.print(res);
+                var firewallId = res.GroupId;
+                return tinyuc.bindFirewall(region, firewallId, hostId);
             })
             .then(function(res) {
                 helper.print(res);
@@ -121,6 +179,7 @@ function tinyucOp(publicKey, privateKey) {
     return {
         HOST_STATE: HOST_STATE,
         searchImage: searchImage,
+        getOrCreateFirewall: getOrCreateFirewall,
         waitHostState: waitHostState,
         setupHost: setupHost,
         teardownHost: teardownHost

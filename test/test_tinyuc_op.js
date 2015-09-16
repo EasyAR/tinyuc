@@ -18,6 +18,34 @@ describe('tinyuc op', function() {
         .fail(done);
     });
 
+    describe('get or create firewall', function() {
+        it('should get firewall if already exists', function(done) {
+            helper.mockUCloud(
+                'DescribeSecurityGroup-22'
+            );
+            tinyucop.getOrCreateFirewall('some-region', [22])
+            .then(function(res) {
+                assert.property(res, 'GroupId');
+                done();
+            })
+            .fail(done);
+        });
+
+        it('should create firewall if not exists', function(done) {
+            helper.mockUCloud(
+                'DescribeSecurityGroup',
+                'CreateSecurityGroup',
+                'DescribeSecurityGroup-22'
+            );
+            tinyucop.getOrCreateFirewall('some-region', [22])
+            .then(function(res) {
+                assert.property(res, 'GroupId');
+                done();
+            })
+            .fail(done);
+        });
+    });
+
     it('should wait host state', function(done) {
         helper.mockUCloud(
             'DescribeUHostInstance-Starting',
@@ -37,10 +65,27 @@ describe('tinyuc op', function() {
             'CreateUHostInstance',
             'AllocateEIP',
             'BindEIP',
+            'DescribeSecurityGroup',
+            'CreateSecurityGroup',
+            'DescribeSecurityGroup-22',
+            'GrantSecurityGroup',
             'DescribeUHostInstance-Starting',
             'DescribeUHostInstance'
         );
-        helper.check(tinyucop.setupHost('some-region', 'some-image', 'some-password', 1, 2048, 20, 'some-name', 'Dynamic', 'Bgp', 5, 50), done);
+        var config = {
+            'region': 'some-region',
+            'imageId': 'some-image',
+            'password': 'some-password',
+            'cpu': 2,
+            'memory': 2048,
+            'disk': 20,
+            'name': 'some-name',
+            'chargeType': 'Dynamic',
+            'operator': 'Bgp',
+            'bandwidth': 5,
+            'ports': [22]
+        }
+        helper.check(tinyucop.setupHost(config, 50), done);
     });
 
     it('should teardown host', function(done) {

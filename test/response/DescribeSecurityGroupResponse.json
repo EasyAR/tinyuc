@@ -1,0 +1,20 @@
+{
+  "RetCode": 0,
+  "Action": "DescribeSecurityGroupResponse",
+  "DataSet": [
+    {
+      "GroupId": 1,
+      "GroupName": "非Web服务器推荐(22，3389)",
+      "Description": "开放22，3389端口和ICMP",
+      "CreateTime": 1427190591,
+      "Type": 1
+    },
+    {
+      "GroupId": 2,
+      "GroupName": "Web服务器推荐(22，3389，80，443)",
+      "Description": "开放22，3389，80，443端口和ICMP",
+      "CreateTime": 1427190591,
+      "Type": 2
+    }
+  ]
+}

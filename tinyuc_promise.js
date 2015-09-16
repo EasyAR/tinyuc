@@ -79,6 +79,24 @@ function tinyucPromise(publicKey, privateKey) {
         return deferred.promise;
     }
 
+    function getFirewalls(region) {
+        var deferred = Q.defer();
+        tinyuc.getFirewalls(region, deferred.makeNodeResolver());
+        return deferred.promise;
+    }
+
+    function createFirewall(region, ports) {
+        var deferred = Q.defer();
+        tinyuc.createFirewall(region, ports, deferred.makeNodeResolver());
+        return deferred.promise;
+    }
+
+    function bindFirewall(region, firewallId, hostId) {
+        var deferred = Q.defer();
+        tinyuc.bindFirewall(region, firewallId, hostId, deferred.makeNodeResolver());
+        return deferred.promise;
+    }
+
     return {
         CHARGE_TYPE: tinyuc.CHARGE_TYPE,
         listHosts: listHosts,
@@ -92,7 +110,10 @@ function tinyucPromise(publicKey, privateKey) {
         showIP: showIP,
         bindIP: bindIP,
         unbindIP: unbindIP,
-        releaseIP: releaseIP
+        releaseIP: releaseIP,
+        getFirewalls: getFirewalls,
+        createFirewall: createFirewall,
+        bindFirewall: bindFirewall
     };
 
 }

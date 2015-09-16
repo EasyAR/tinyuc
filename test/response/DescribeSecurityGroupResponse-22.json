@@ -1,0 +1,13 @@
+{
+  "RetCode": 0,
+  "Action": "DescribeSecurityGroupResponse",
+  "DataSet": [
+    {
+      "GroupId": 22,
+      "GroupName": "22",
+      "Description": "22",
+      "CreateTime": 1427190591,
+      "Type": 0
+    }
+  ]
+}

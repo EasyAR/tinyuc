@@ -134,6 +134,41 @@ function tinyuc(publicKey, privateKey) {
         uccore.request(params, cb);
     }
 
+    function getFirewalls(region, cb) {
+        var params = {
+            'Action': 'DescribeSecurityGroup',
+            'Region': region
+        };
+        uccore.request(params, cb);
+    }
+
+    function createFirewall(region, ports, cb) {
+        var name = ports.sort().map(function(port) {
+            return String(port);
+        }).join(',');
+        var params = {
+            'Action': 'CreateSecurityGroup',
+            'Region': region,
+            'GroupName': name,
+            'Description': name,
+        };
+        for (var i = 0; i < ports.length; i++) {
+            params['Rule.'+i] = 'TCP|'+ports[i]+'|0.0.0.0/0|ACCEPT|50';
+        }
+        uccore.request(params, cb);
+    }
+
+    function bindFirewall(region, firewallId, hostId, cb) {
+        var params = {
+            'Action': 'GrantSecurityGroup',
+            'Region': region,
+            'GroupId': firewallId,
+            'ResourceType': 'uhost',
+            'ResourceId': hostId
+        };
+        uccore.request(params, cb);
+    }
+
     return {
         CHARGE_TYPE: CHARGE_TYPE,
         listHosts: listHosts,
@@ -147,7 +182,10 @@ function tinyuc(publicKey, privateKey) {
         showIP: showIP,
         bindIP: bindIP,
         unbindIP: unbindIP,
-        releaseIP: releaseIP
+        releaseIP: releaseIP,
+        getFirewalls: getFirewalls,
+        createFirewall: createFirewall,
+        bindFirewall: bindFirewall
     };
 
 }

@@ -4,7 +4,7 @@
 var argv = require('yargs')
     .usage('Usage: $0 [region] [image_name] -k [keys]')
     .demand(2)
-    .default('k', 'keys.json').alias('k', 'keys')
+    .default('k', 'ucloud_keys.json').alias('k', 'keys')
     .help('h').alias('h', 'help')
     .epilog('copyright 2015, sightp.com')
     .argv;

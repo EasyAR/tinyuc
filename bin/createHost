@@ -2,7 +2,7 @@
 'use strict';
 
 var argv = require('yargs')
-    .usage('Usage: $0 [region] [image_id] -n [name] -p [password] -c [num_cpus] -m [memory] -d [disk_size] -g [charge_type] -o [operator] -b [bandwidth] -k [keys]')
+    .usage('Usage: $0 [region] [image_id] -n [name] -p [password] -c [num_cpus] -m [memory] -d [disk_size] -g [charge_type] -o [operator] -b [bandwidth] -f [firewall_ports] -k [keys]')
     .demand(2)
     .default('n', 'newImage').alias('n', 'name')
     .default('p', 'secretPassword').alias('p', 'password')
@@ -12,28 +12,32 @@ var argv = require('yargs')
     .default('g', 'Dynamic').alias('g', 'charge_type')
     .default('o', 'Bgp').alias('o', 'operator')
     .default('b', '5').alias('b', 'bandwidth')
-    .default('k', 'keys.json').alias('k', 'keys')
+    .array('f').default('f', [22]).alias('f', 'firewall_ports')
+    .default('k', 'ucloud_keys.json').alias('k', 'keys')
     .help('h').alias('h', 'help')
     .epilog('copyright 2015, sightp.com')
     .argv;
 
 var helper = require('../helper');
 
-var region = argv._[0];
-var imageId = argv._[1];
-var name = argv.name;
-var password = argv.password;
-var numCpus = argv.num_cpus;
-var memory = argv.memory;
-var diskSize = argv.disk_size;
-var chargeType = argv.charge_type;
-var operator = argv.operator;
-var bandwidth = argv.bandwidth;
+var config = {
+    'region': argv._[0],
+    'imageId': argv._[1],
+    'name': argv.name,
+    'password': argv.password,
+    'cpu': argv.num_cpus,
+    'memory': argv.memory,
+    'disk': argv.disk_size,
+    'chargeType': argv.charge_type,
+    'operator': argv.operator,
+    'bandwidth': argv.bandwidth,
+    'ports': argv.firewall_ports
+};
 var keys = helper.readJson(argv.keys);
 
 var ucop = require('../tinyuc_op')(keys.publicKey, keys.privateKey);
 
-ucop.setupHost(region, imageId, password, numCpus, memory, diskSize, name, chargeType, operator, bandwidth)
+ucop.setupHost(config)
 .then(function(res) {
     helper.print(res);
 })
