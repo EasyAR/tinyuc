@@ -98,7 +98,7 @@ Options:
   -c, --num_cpus                                                  [default: "2"]
   -m, --memory                                                 [default: "2048"]
   -d, --disk_size                                                [default: "20"]
-  -g, --charge_type                                         [default: "Dynamic"]
+  -g, --charge_type                                           [default: "Month"]
   -o, --operator                                                [default: "Bgp"]
   -b, --bandwidth                                                 [default: "5"]
   -f, --firewall_ports                                   [array] [default: [22]]
