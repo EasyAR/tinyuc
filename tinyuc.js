@@ -83,13 +83,13 @@ function tinyuc(publicKey, privateKey) {
         uccore.request(params, cb);
     }
 
-    function createIP(region, operator, bandwidth, cb) {
+    function createIP(region, operator, bandwidth, chargeType, cb) {
         var params = {
             'Action': 'AllocateEIP',
             'Region': region,
             'OperatorName': operator,
             'Bandwidth': bandwidth,
-            'ChargeType': 'Dynamic'
+            'ChargeType': chargeType
         };
         uccore.request(params, cb);
     }

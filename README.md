@@ -19,7 +19,7 @@ operations with node callback
   * `function showHost(region, hostId, cb)`
   * `function stopHost(region, hostId, cb)`
   * `function deleteHost(region, hostId, cb)`
-  * `function createIP(region, operator, bandwidth, cb)`
+  * `function createIP(region, operator, bandwidth, chargeType, cb)`
   * `function showIP(region, eipId, cb)`
   * `function bindIP(region, eipId, hostId, cb)`
   * `function unbindIP(region, eipId, hostId, cb)`
@@ -39,7 +39,7 @@ operations that return promises
   * `function showHost(region, hostId)`
   * `function stopHost(region, hostId)`
   * `function deleteHost(region, hostId)`
-  * `function createIP(region, operator, bandwidth)`
+  * `function createIP(region, operator, bandwidth, chargeType)`
   * `function showIP(region, eipId)`
   * `function bindIP(region, eipId, hostId)`
   * `function unbindIP(region, eipId, hostId)`

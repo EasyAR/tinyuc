@@ -45,7 +45,7 @@ describe('tinyuc promise', function() {
 
     it('should create ip', function(done) {
         helper.mockUCloud('AllocateEIP');
-        helper.check(tinyuc.createIP('some-region', 'some-operator', 5), done);
+        helper.check(tinyuc.createIP('some-region', 'some-operator', 5, 'Dynamic'), done);
     });
 
     it('should show ip', function(done) {

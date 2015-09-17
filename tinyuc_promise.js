@@ -49,9 +49,9 @@ function tinyucPromise(publicKey, privateKey) {
         return deferred.promise;
     }
 
-    function createIP(region, operator, bandwidth) {
+    function createIP(region, operator, bandwidth, chargeType) {
         var deferred = Q.defer();
-        tinyuc.createIP(region, operator, bandwidth, deferred.makeNodeResolver());
+        tinyuc.createIP(region, operator, bandwidth, chargeType, deferred.makeNodeResolver());
         return deferred.promise;
     }
 

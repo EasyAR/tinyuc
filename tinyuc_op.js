@@ -108,7 +108,7 @@ function tinyucOp(publicKey, privateKey) {
             .then(function(res) {
                 helper.print(res);
                 hostId = res.UHostIds[0];
-                return tinyuc.createIP(region, operator, bandwidth);
+                return tinyuc.createIP(region, operator, bandwidth, chargeType);
             })
             .then(function(res) {
                 helper.print(res);
