@@ -84,7 +84,7 @@ describe('tinyuc op', function() {
             'operator': 'Bgp',
             'bandwidth': 5,
             'ports': [22]
-        }
+        };
         helper.check(tinyucop.setupHost(config, 50), done);
     });
 

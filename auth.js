@@ -11,8 +11,8 @@ function genSign(params, privateKey) {
 }
 
 function signParams(params, publicKey, privateKey) {
-    params['PublicKey'] = publicKey;
-    params['Signature'] = genSign(params, privateKey);
+    params.PublicKey = publicKey;
+    params.Signature = genSign(params, privateKey);
     return params;
 }
 

@@ -11,7 +11,7 @@ function tinyuc(publicKey, privateKey) {
         'MONTH': 'Month',
         'DYNAMIC': 'Dynamic',
         'TRIAL': 'Trial'
-    }
+    };
 
     function listHosts(region, cb) {
         var params = {

@@ -1,6 +1,6 @@
 'use strict';
 
-var HOST = 'https://api.ucloud.cn/'
+var HOST = 'https://api.ucloud.cn/';
 
 var agent = require('superagent');
 
@@ -16,7 +16,7 @@ function uccore(publicKey, privateKey) {
                 cb(err);
             } else {
                 res = res.body;
-                if (res.RetCode != 0) {
+                if (res.RetCode) {
                     cb(new Error(JSON.stringify(res, null, 2)));
                 } else {
                     cb(null, res);

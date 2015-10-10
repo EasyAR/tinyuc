@@ -91,17 +91,17 @@ function tinyucOp(publicKey, privateKey) {
     }
 
     function setupHost(config, checkInterval) {
-        var region = config.region
-          , imageId = config.imageId
-          , password = config.password
-          , cpu = config.cpu
-          , memory = config.memory
-          , disk = config.disk
-          , name = config.name
-          , chargeType = config.chargeType
-          , operator = config.operator
-          , bandwidth = config.bandwidth
-          , ports = config.ports;
+        var region = config.region,
+            imageId = config.imageId,
+            password = config.password,
+            cpu = config.cpu,
+            memory = config.memory,
+            disk = config.disk,
+            name = config.name,
+            chargeType = config.chargeType,
+            operator = config.operator,
+            bandwidth = config.bandwidth,
+            ports = config.ports;
         return Q.Promise(function(resolve, reject) {
             var hostId;
             tinyuc.createHost(region, imageId, password, cpu, memory, disk, name, chargeType)
@@ -183,7 +183,7 @@ function tinyucOp(publicKey, privateKey) {
         waitHostState: waitHostState,
         setupHost: setupHost,
         teardownHost: teardownHost
-    }
+    };
 }
 
 module.exports = tinyucOp;
