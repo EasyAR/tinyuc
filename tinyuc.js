@@ -25,7 +25,7 @@ function tinyuc(publicKey, privateKey) {
         var params = {
             'Action': 'DescribeImage',
             'Region': region,
-            'ImageType': 'Base'
+            'Limit': 2000
         };
         uccore.request(params, cb);
     }
@@ -44,6 +44,23 @@ function tinyuc(publicKey, privateKey) {
         var params = {
             'Action': 'CreateUHostInstance',
             'Region': region,
+            'ImageId': imageId,
+            'LoginMode': 'Password',
+            'Password': new Buffer(password).toString('base64'),
+            'CPU': cpu,
+            'Memory': memory,
+            'DiskSpace': disk,
+            'Name': name,
+            'ChargeType': chargeType
+        };
+        uccore.request(params, cb);
+    }
+
+    function createHostWithZone(region, zone, imageId, password, cpu, memory, disk, name, chargeType, cb) {
+        var params = {
+            'Action': 'CreateUHostInstance',
+            'Region': region,
+            'Zone': zone,
             'ImageId': imageId,
             'LoginMode': 'Password',
             'Password': new Buffer(password).toString('base64'),
@@ -175,6 +192,7 @@ function tinyuc(publicKey, privateKey) {
         listImages: listImages,
         createCustomImage: createCustomImage,
         createHost: createHost,
+        createHostWithZone: createHostWithZone,
         showHost: showHost,
         stopHost: stopHost,
         deleteHost: deleteHost,

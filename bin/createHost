@@ -2,8 +2,9 @@
 'use strict';
 
 var argv = require('yargs')
-    .usage('Usage: $0 [region] [image_id] -n [name] -p [password] -c [num_cpus] -m [memory] -d [disk_size] -g [charge_type] -o [operator] -b [bandwidth] -f [firewall_ports] -k [keys]')
+    .usage('Usage: $0 [region] [image_id] -z [zone] -n [name] -p [password] -c [num_cpus] -m [memory] -d [disk_size] -g [charge_type] -o [operator] -b [bandwidth] -f [firewall_ports] -k [keys]')
     .demand(2)
+    .alias('z', 'zone')
     .default('n', 'newImage').alias('n', 'name')
     .default('p', 'secretPassword').alias('p', 'password')
     .default('c', '2').alias('c', 'num_cpus')
@@ -23,6 +24,7 @@ var helper = require('../helper');
 var config = {
     'region': argv._[0],
     'imageId': argv._[1],
+    'zone': argv.zone,
     'name': argv.name,
     'password': argv.password,
     'cpu': argv.num_cpus,

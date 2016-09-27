@@ -92,6 +92,7 @@ function tinyucOp(publicKey, privateKey) {
 
     function setupHost(config, checkInterval) {
         var region = config.region,
+            zone = config.zone,
             imageId = config.imageId,
             password = config.password,
             cpu = config.cpu,
@@ -104,8 +105,13 @@ function tinyucOp(publicKey, privateKey) {
             ports = config.ports;
         return Q.Promise(function(resolve, reject) {
             var hostId;
-            tinyuc.createHost(region, imageId, password, cpu, memory, disk, name, chargeType)
-            .then(function(res) {
+            var p;
+            if (zone) {
+                p = tinyuc.createHostWithZone(region, zone, imageId, password, cpu, memory, disk, name, chargeType)
+            } else {
+                p = tinyuc.createHost(region, imageId, password, cpu, memory, disk, name, chargeType)
+            }
+            p.then(function(res) {
                 helper.print(res);
                 hostId = res.UHostIds[0];
                 return tinyuc.createIP(region, operator, bandwidth, chargeType);
