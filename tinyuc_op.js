@@ -46,9 +46,9 @@ function tinyucOp(publicKey, privateKey) {
 
     function getOrCreateFirewall(region, ports) {
         return Q.promise(function(resolve, reject) {
-            var name = ports.sort().map(function(port) {
+            var name = 'f'+ports.sort().map(function(port) {
                 return String(port);
-            }).join(',');
+            }).join('x');
             searchFirewall(region, name)
             .then(function(res) {
                 if (res.length < 1) {

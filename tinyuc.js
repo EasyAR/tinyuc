@@ -160,9 +160,9 @@ function tinyuc(publicKey, privateKey) {
     }
 
     function createFirewall(region, ports, cb) {
-        var name = ports.sort().map(function(port) {
+        var name = 'f'+ports.sort().map(function(port) {
             return String(port);
-        }).join(',');
+        }).join('x');
         var params = {
             'Action': 'CreateSecurityGroup',
             'Region': region,
